@@ -1,6 +1,14 @@
 import './App.css';
 import { useState } from "react";
 
+function Title() {
+  return(
+    <>
+      <h1 className='title center'>Fike</h1>
+      <h3 className='subtitle center'>Just don't do it</h3>
+    </>
+  );
+}
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -19,7 +27,7 @@ function ProductRow({ product }) {
   return (
     <tr>
       <td>{name}</td>
-      <td>{product.price}</td>
+      <td className='center'>{product.price}</td>
     </tr>
   );
 }
@@ -47,15 +55,17 @@ function ProductTable({ products, filterText, inStockOnly }) {
     lastCategory = product.category;
   });
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div className='center'>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 }
 
@@ -67,7 +77,7 @@ function SearchBar({
 }) {
   return (
     <>
-      <form>
+      <form className='center'>
         <input
           type="text"
           value={filterText}
@@ -91,52 +101,37 @@ function FilterableProductTable({ products }) {
 
   return (
     <>
-      <SearchBar
-        filterText={filterText}
-        inStockOnly={inStockOnly}
-        onFilterTextChange={setFilterText}
-        onInStockOnlyChange={setInStockOnly}
-      />
-      <ProductTable
-        products={products}
-        filterText={filterText}
-        inStockOnly={inStockOnly}
-      />
+    <body className='body'>
+      <Title />
+        <div className='table'>
+        <SearchBar
+          filterText={filterText}
+          inStockOnly={inStockOnly}
+          onFilterTextChange={setFilterText}
+          onInStockOnlyChange={setInStockOnly}
+        />
+        <ProductTable
+          products={products}
+          filterText={filterText}
+          inStockOnly={inStockOnly}
+        />
+      </div>
+      </body>
     </>
   );
 }
 
 const PRODUCTS = [
-  {
-    category: "Hat",
-    price: "$30.00",
-    stocked: true,
-    name: "A-Frame LA Trucker"
-  },
-  {
-    category: "Hat",
-    price: "$35.99",
-    stocked: true,
-    name: "A-Frame SD Trucker"
-  },
+  { category: "Hat", price: "$30.00", stocked: true, name: "A-Frame LA Trucker"},
+  { category: "Hat", price: "$35.99", stocked: true, name: "A-Frame SD Trucker"},
   { category: "Hat", price: "$39.99", stocked: false, name: "K-Frame LA MVP" },
   { category: "Hat", price: "$33.00", stocked: true, name: "K-Frame SD MVP" },
   { category: "Hat", price: "$14.99", stocked: false, name: "Top Spinner" },
   { category: "Shoes", price: "$69.99", stocked: true, name: "Flip Flops" },
   { category: "Shoes", price: "$75.00", stocked: false, name: "House Loafers" },
   { category: "Shoes", price: "$109.99", stocked: true, name: "Nike Cortez" },
-  {
-    category: "Shoes",
-    price: "$125.00",
-    stocked: false,
-    name: "Off White New Balances"
-  },
-  {
-    category: "Shoes",
-    price: "Expensive af",
-    stocked: true,
-    name: "Jasmine's Crocs"
-  }
+  { category: "Shoes", price: "$125.00", stocked: false, name: "Off White New Balances"},
+  { category: "Shoes", price: "Expensive af", stocked: true, name: "Jasmine's Crocs"}
 ];
 
 export default function App() {
